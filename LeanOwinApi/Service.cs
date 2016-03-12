@@ -10,7 +10,7 @@ namespace LeanOwinApi
     public sealed class Service
     {
         public static readonly string BaseAddress = "http://localhost:1337";
-        public static readonly string DisplayName = "Lean Owin Api Service";
+        public static readonly string DisplayName = "Lean OWIN API Service";
         public static readonly string Name = "LeanOwinApi";
         public static readonly string Description = "Self-hosted OWIN API.";
         private IDisposable _server;
