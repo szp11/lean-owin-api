@@ -17,6 +17,8 @@ namespace LeanOwinApi
 
         public static void ServiceConfiguration(HostConfigurator x)
         {
+            x.UseLinuxIfAvailable();
+
             x.Service<Service>(svc =>
             {
                 svc.ConstructUsing(name => new Service());
