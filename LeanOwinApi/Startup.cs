@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Microsoft.Owin.Cors;
 using Owin;
 using Topshelf;
@@ -21,7 +16,7 @@ namespace LeanOwinApi
         {
             var httpConfiguration = new HttpConfiguration();
 
-
+            WebApiConfig.Configure(httpConfiguration);
 
             app.UseWebApi(httpConfiguration);
             app.UseCors(CorsOptions.AllowAll);
