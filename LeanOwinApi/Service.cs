@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Microsoft.Owin.Hosting;
 using Topshelf;
 using Topshelf.HostConfigurators;
@@ -7,10 +8,10 @@ namespace LeanOwinApi
 {
     public sealed class Service
     {
-        public static readonly string BaseAddress = "http://localhost:1337";
-        public static readonly string DisplayName = "Lean OWIN API Service";
-        public static readonly string Name = "LeanOwinApi";
-        public static readonly string Description = "Self-hosted OWIN API.";
+        public static readonly string BaseAddress = ConfigurationManager.AppSettings["BaseAddress"];
+        public static readonly string DisplayName = ConfigurationManager.AppSettings["DisplayName"];
+        public static readonly string Name = ConfigurationManager.AppSettings["Name"];
+        public static readonly string Description = ConfigurationManager.AppSettings["Description"];
         private IDisposable _server;
 
         public static void ServiceConfiguration(HostConfigurator x)
