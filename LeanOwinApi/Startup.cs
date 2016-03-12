@@ -17,6 +17,7 @@ namespace LeanOwinApi
             var httpConfiguration = new HttpConfiguration();
 
             WebApiConfig.Configure(httpConfiguration);
+            UnityConfig.Configure(httpConfiguration);
 
             app.UseWebApi(httpConfiguration);
             app.UseCors(CorsOptions.AllowAll);

@@ -10,9 +10,9 @@ namespace LeanOwinApi
     public sealed class Service
     {
         public static readonly string BaseAddress = "http://localhost:1337";
-        public static readonly string DisplayName = "Transform Test Tool API";
-        public static readonly string Name = "TransformTestToolAPI";
-        public static readonly string Description = "Self-hosted OWIN API for the Transform Test Tool";
+        public static readonly string DisplayName = "Lean Owin Api Service";
+        public static readonly string Name = "LeanOwinApi";
+        public static readonly string Description = "Self-hosted OWIN API.";
         private IDisposable _server;
 
         public static void ServiceConfiguration(HostConfigurator x)
