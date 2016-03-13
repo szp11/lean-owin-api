@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Configuration;
 using LeanOwinApi.Services;
 using Microsoft.Owin.Hosting;
-using Microsoft.Practices.Unity;
 using Topshelf;
 using Topshelf.HostConfigurators;
-using Topshelf.Options;
 
 namespace LeanOwinApi
 {

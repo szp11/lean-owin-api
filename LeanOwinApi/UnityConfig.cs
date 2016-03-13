@@ -12,6 +12,8 @@ namespace LeanOwinApi
     /// </summary>
     internal sealed class UnityConfig
     {
+        public static UnityDependencyResolver DependencyResolver => new UnityDependencyResolver(Container);
+
         public static void Configure()
         {
             Container.RegisterType<IConfigurationService, ConfigurationService>();
@@ -29,9 +31,7 @@ namespace LeanOwinApi
 
         #region Singleton implementation
         public static IUnityContainer Container => _unityContainer.Value;
-
-        public static UnityDependencyResolver DependencyResolver => new UnityDependencyResolver(Container);
-
+        
         private static readonly Lazy<IUnityContainer> _unityContainer
                 = new Lazy<IUnityContainer>(() =>
                 {
