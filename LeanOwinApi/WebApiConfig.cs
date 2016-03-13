@@ -6,13 +6,18 @@ namespace LeanOwinApi
 {
     internal sealed class WebApiConfig
     {
-        public static void Configure(HttpConfiguration config)
+        public static HttpConfiguration Configure()
         {
+            var config = new HttpConfiguration();
+
             config.MapHttpAttributeRoutes();
 
-            RemoveXmlFormatter(config);
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
 
             ConfigureJsonSerializerSettings(config);
+
+            config.DependencyResolver = UnityConfig.DependencyResolver;
+            return config;
         }
 
         private static void ConfigureJsonSerializerSettings(HttpConfiguration config)
@@ -21,11 +26,6 @@ namespace LeanOwinApi
             serializerSettings.Converters.Add(new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-ddTHH:mm:ssZ" });
             serializerSettings.Converters.Add(new StringEnumConverter());
             config.Formatters.JsonFormatter.SerializerSettings = serializerSettings;
-        }
-
-        private static void RemoveXmlFormatter(HttpConfiguration config)
-        {
-            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }

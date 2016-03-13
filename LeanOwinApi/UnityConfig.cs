@@ -2,32 +2,42 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
+using LeanOwinApi.Services;
 using Microsoft.Practices.Unity;
 
 namespace LeanOwinApi
 {
+    /// <summary>
+    /// Wrapper around Microsoft Unity
+    /// </summary>
     internal sealed class UnityConfig
     {
-        public static void Configure(HttpConfiguration config)
+        public static void Configure()
         {
-            UnityContainer.RegisterType(typeof(Service));
+            Container.RegisterType<IConfigurationService, ConfigurationService>();
+
+            var configurationService = Container.Resolve<IConfigurationService>();
+            Container.RegisterInstance(new Service(configurationService), new ContainerControlledLifetimeManager());
+            
+            // Register your types here.
 
             // Type registration...
-            // UnityContainer.RegisterType<ILogger, Logger>();
-            // UnityContainer.RegisterType<IFakeService, FakeService>(new InjectionConstructor(false));
-
-            config.DependencyResolver = new UnityDependencyResolver(UnityContainer);
+            // Container.RegisterType<ILogger, Logger>();
+            // Container.RegisterType<IFakeService, FakeService>(new InjectionConstructor(false));
+            
         }
 
         #region Singleton implementation
+        public static IUnityContainer Container => _unityContainer.Value;
+
+        public static UnityDependencyResolver DependencyResolver => new UnityDependencyResolver(Container);
+
         private static readonly Lazy<IUnityContainer> _unityContainer
                 = new Lazy<IUnityContainer>(() =>
                 {
                     var container = new UnityContainer();
                     return container;
                 });
-
-        private static IUnityContainer UnityContainer => _unityContainer.Value;
         #endregion
 
         #region Unity Dependency Resolver Implementation
