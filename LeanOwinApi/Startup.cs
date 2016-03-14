@@ -13,13 +13,16 @@ namespace LeanOwinApi
             HostFactory.Run(Service.ServiceConfiguration);
 
         }
-        
+
         public void Configuration(IAppBuilder app)
         {
             // Get web api configuration.
             var webApiConfiguration = WebApiConfig.Configure();
-
             app.UseWebApi(webApiConfiguration);
+
+            var fileServerConfiguration = FileServerConfig.Configure();
+            app.UseFileServer(fileServerConfiguration);
+
             app.UseCors(CorsOptions.AllowAll);
         }
     }
