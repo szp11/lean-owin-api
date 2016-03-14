@@ -1,12 +1,13 @@
 ﻿using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Owin;
 
-namespace LeanOwinApi
+namespace LeanOwinApi.Config
 {
     internal sealed class WebApiConfig
     {
-        public static HttpConfiguration Configure()
+        public static void Configure(IAppBuilder app)
         {
             var config = new HttpConfiguration();
 
@@ -17,7 +18,8 @@ namespace LeanOwinApi
             ConfigureJsonSerializerSettings(config);
 
             config.DependencyResolver = UnityConfig.DependencyResolver;
-            return config;
+
+            app.UseWebApi(config);
         }
 
         private static void ConfigureJsonSerializerSettings(HttpConfiguration config)

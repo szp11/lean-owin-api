@@ -5,7 +5,7 @@ using System.Web.Http.Dependencies;
 using LeanOwinApi.Services;
 using Microsoft.Practices.Unity;
 
-namespace LeanOwinApi
+namespace LeanOwinApi.Config
 {
     /// <summary>
     /// Wrapper around Microsoft Unity
@@ -19,7 +19,7 @@ namespace LeanOwinApi
             Container.RegisterType<IConfigurationService, ConfigurationService>();
 
             var configurationService = Container.Resolve<IConfigurationService>();
-            Container.RegisterInstance(new Service(configurationService), new ContainerControlledLifetimeManager());
+            Container.RegisterInstance(new ServiceConfig(configurationService), new ContainerControlledLifetimeManager());
             
             // Register your types here.
 

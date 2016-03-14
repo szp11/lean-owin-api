@@ -1,28 +1,25 @@
 ﻿using Microsoft.Owin.Cors;
 using Owin;
-using Topshelf;
+using LeanOwinApi.Config;
 
 namespace LeanOwinApi
 {
-    public sealed class Startup
+    public sealed class OwinStartup
     {
         static void Main()
         {
             // Unity config happens before OWIN starts.
             UnityConfig.Configure();
-            HostFactory.Run(Service.ServiceConfiguration);
-
+            ServiceConfig.Configure();
         }
 
         public void Configuration(IAppBuilder app)
         {
             // Get web api configuration.
-            var webApiConfiguration = WebApiConfig.Configure();
-            app.UseWebApi(webApiConfiguration);
-
-            var fileServerConfiguration = FileServerConfig.Configure();
-            app.UseFileServer(fileServerConfiguration);
-
+            WebApiConfig.Configure(app);
+            // File server configuration.
+            FileServerConfig.Configure(app);
+            
             app.UseCors(CorsOptions.AllowAll);
         }
     }
