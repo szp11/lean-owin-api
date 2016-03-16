@@ -4,6 +4,13 @@ using System.Configuration;
 
 namespace LeanOwinApi.Services
 {
+    public interface IAppSettingsService
+    {
+        string GetString(string key);
+        bool GetBool(string key);
+        int GetInt(string key);
+    }
+
     public class AppSettingsService : IAppSettingsService
     {
         private readonly ConcurrentDictionary<string, object> _map = new ConcurrentDictionary<string, object>();

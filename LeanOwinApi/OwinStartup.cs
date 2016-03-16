@@ -15,7 +15,7 @@ namespace LeanOwinApi
 
         public void Configuration(IAppBuilder app)
         {
-            // Configure web api
+            // Configure web api 
             WebApiConfig.Configure(app);
             // Configure file server
             FileServerConfig.Configure(app);

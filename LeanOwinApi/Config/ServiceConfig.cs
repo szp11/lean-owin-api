@@ -8,6 +8,7 @@ namespace LeanOwinApi.Config
     internal sealed class ServiceConfig
     {
         private readonly IAppSettingsService _appSettingsService;
+
         public string ServiceDescription => _appSettingsService.GetString("Description");
         public string DisplayName => _appSettingsService.GetString("DisplayName");
         public string ServiceName => _appSettingsService.GetString("Name");
