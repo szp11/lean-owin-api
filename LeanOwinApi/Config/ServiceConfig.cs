@@ -1,25 +1,19 @@
 ﻿using System;
-using LeanOwinApi.Services;
+using LeanOwinApi.Settings;
 using Microsoft.Owin.Hosting;
+using Microsoft.Practices.Unity;
 using Topshelf;
 
 namespace LeanOwinApi.Config
 {
     internal sealed class ServiceConfig
     {
-        private readonly IAppSettingsService _appSettingsService;
-
-        public string ServiceDescription => _appSettingsService.GetString("Description");
-        public string DisplayName => _appSettingsService.GetString("DisplayName");
-        public string ServiceName => _appSettingsService.GetString("Name");
-        public string BaseAddress => _appSettingsService.GetString("BaseAddress");
-
+        [Dependency]
+        public ServiceSettings ServiceSettings { get; set; }
+        [Dependency]
+        public WebApiSettings WebApiSettings { get; set; }
+        
         private IDisposable _server;
-
-        public ServiceConfig(IAppSettingsService appSettingsService)
-        {
-            _appSettingsService = appSettingsService;
-        }
 
         public static void Configure()
         {
@@ -41,9 +35,9 @@ namespace LeanOwinApi.Config
 
                 x.RunAsLocalSystem();
 
-                x.SetDescription(service.ServiceDescription);
-                x.SetDisplayName(service.DisplayName);
-                x.SetServiceName(service.ServiceName);
+                x.SetDescription(service.ServiceSettings.Description);
+                x.SetDisplayName(service.ServiceSettings.DisplayName);
+                x.SetServiceName(service.ServiceSettings.Name);
 
                 x.StartAutomatically();
             });
@@ -51,7 +45,7 @@ namespace LeanOwinApi.Config
 
         public void OnStart()
         {
-            var startOptions = new StartOptions(BaseAddress);
+            var startOptions = new StartOptions(WebApiSettings.BaseUrl);
             _server = WebApp.Start<OwinStartup>(startOptions);
         }
 

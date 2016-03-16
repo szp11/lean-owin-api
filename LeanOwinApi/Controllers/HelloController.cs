@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using System.Threading.Tasks;
 using System.Web.Http;
-using LeanOwinApi.Services;
+using LeanOwinApi.Settings;
 
 namespace LeanOwinApi.Controllers
 {
@@ -9,7 +9,7 @@ namespace LeanOwinApi.Controllers
     public class HelloController : ApiController
     {
         [Dependency]
-        public IAppSettingsService AppSettingsService { get; set; }
+        public WebApiSettings AppSettingsService { get; set; }
 
         [Route("")]
         [HttpGet]
@@ -34,7 +34,7 @@ namespace LeanOwinApi.Controllers
 
         private string GetHelloWorld()
         {
-            return AppSettingsService.GetString("HelloWorldMessage");
+            return AppSettingsService.HelloWorldMessage;
         }
     }
 }

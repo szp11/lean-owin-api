@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
-using LeanOwinApi.Services;
+using LeanOwinApi.Settings;
 using Microsoft.Practices.Unity;
 
 namespace LeanOwinApi.Config
@@ -16,10 +17,11 @@ namespace LeanOwinApi.Config
 
         public static void Configure()
         {
-            Container.RegisterType<IAppSettingsService, AppSettingsService>();
+            var svcSettings = GetServiceSettings();
+            Container.RegisterInstance(svcSettings, new ContainerControlledLifetimeManager());
 
-            var configurationService = Container.Resolve<IAppSettingsService>();
-            Container.RegisterInstance(new ServiceConfig(configurationService), new ContainerControlledLifetimeManager());
+            var webApiSettings = GetWebApiSettings();
+            Container.RegisterInstance(webApiSettings, new ContainerControlledLifetimeManager());
             
             // Register your types here.
 
@@ -27,6 +29,18 @@ namespace LeanOwinApi.Config
             // Container.RegisterType<ILogger, Logger>();
             // Container.RegisterType<IFakeService, FakeService>(new InjectionConstructor(false));
             
+        }
+
+        private static ServiceSettings GetServiceSettings()
+        {
+            var settings = ConfigurationManager.GetSection("leanOwinApi/service") as dynamic;
+            return settings;
+        }
+
+        private static WebApiSettings GetWebApiSettings()
+        {
+            var settings = ConfigurationManager.GetSection("leanOwinApi/webApi") as dynamic;
+            return settings;
         }
 
         #region Singleton implementation
