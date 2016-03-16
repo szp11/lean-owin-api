@@ -9,7 +9,7 @@ namespace LeanOwinApi.Controllers
     public class HelloController : ApiController
     {
         [Dependency]
-        public WebApiSettings AppSettingsService { get; set; }
+        public WebApiSettings WebApiSettings { get; set; }
 
         [Route("")]
         [HttpGet]
@@ -34,7 +34,7 @@ namespace LeanOwinApi.Controllers
 
         private string GetHelloWorld()
         {
-            return AppSettingsService.HelloWorldMessage;
+            return WebApiSettings.HelloWorldMessage;
         }
     }
 }
