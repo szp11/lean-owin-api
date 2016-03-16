@@ -6,6 +6,5 @@ namespace LeanOwinApi.Settings
     {
         public string HelloWorldMessage { get; set; }
         public bool CorsEnabled { get; set; }
-        public IEnumerable<string> CorsAllowedOrigins { get; set; }
     }
 }

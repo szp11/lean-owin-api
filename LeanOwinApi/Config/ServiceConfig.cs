@@ -18,7 +18,6 @@ namespace LeanOwinApi.Config
             HostFactory.Run(x =>
             {
                 var service = UnityConfig.DependencyResolver.GetService(typeof(ServiceConfig)) as ServiceConfig;
-
                 x.UseLinuxIfAvailable();
 
                 x.Service<ServiceConfig>(svc =>

@@ -1,7 +1,6 @@
 ﻿using System.Web.Http;
 using LeanOwinApi.Settings;
 using Microsoft.Owin.Cors;
-using Microsoft.Practices.Unity;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Owin;
@@ -12,19 +11,17 @@ namespace LeanOwinApi.Config
     {
         public static void Configure(IAppBuilder app)
         {
+            var webApiSettings = UnityConfig.DependencyResolver.GetService(typeof(WebApiSettings)) as WebApiSettings;
+
             var config = new HttpConfiguration();
-
             config.MapHttpAttributeRoutes();
-
             config.Formatters.Remove(config.Formatters.XmlFormatter);
-
             ConfigureJsonSerializerSettings(config);
-
             config.DependencyResolver = UnityConfig.DependencyResolver;
-
             app.UseWebApi(config);
 
-            app.UseCors(CorsOptions.AllowAll);
+            if(webApiSettings.CorsEnabled)
+                app.UseCors(CorsOptions.AllowAll);
             
         }
 
