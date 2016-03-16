@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LeanOwinApi.Settings
+﻿namespace LeanOwinApi.Settings
 {
     public class WebApiSettings
     {

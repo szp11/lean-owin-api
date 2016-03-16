@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Web.Http;
 using LeanOwinApi.Settings;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json;
@@ -18,11 +19,11 @@ namespace LeanOwinApi.Config
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             ConfigureJsonSerializerSettings(config);
             config.DependencyResolver = UnityConfig.DependencyResolver;
-            app.UseWebApi(config);
-
+            
             if(webApiSettings.CorsEnabled)
                 app.UseCors(CorsOptions.AllowAll);
             
+            app.UseWebApi(config);
         }
 
         private static void ConfigureJsonSerializerSettings(HttpConfiguration config)
