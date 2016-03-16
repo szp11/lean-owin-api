@@ -7,17 +7,17 @@ namespace LeanOwinApi.Config
 {
     internal sealed class ServiceConfig
     {
-        private readonly IConfigurationService _configurationService;
-        public string ServiceDescription => _configurationService.GetString("Description");
-        public string DisplayName => _configurationService.GetString("DisplayName");
-        public string ServiceName => _configurationService.GetString("Name");
-        public string BaseAddress => _configurationService.GetString("BaseAddress");
+        private readonly IAppSettingsService _appSettingsService;
+        public string ServiceDescription => _appSettingsService.GetString("Description");
+        public string DisplayName => _appSettingsService.GetString("DisplayName");
+        public string ServiceName => _appSettingsService.GetString("Name");
+        public string BaseAddress => _appSettingsService.GetString("BaseAddress");
 
         private IDisposable _server;
 
-        public ServiceConfig(IConfigurationService configurationService)
+        public ServiceConfig(IAppSettingsService appSettingsService)
         {
-            _configurationService = configurationService;
+            _appSettingsService = appSettingsService;
         }
 
         public static void Configure()

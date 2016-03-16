@@ -16,9 +16,9 @@ namespace LeanOwinApi.Config
 
         public static void Configure()
         {
-            Container.RegisterType<IConfigurationService, ConfigurationService>();
+            Container.RegisterType<IAppSettingsService, AppSettingsService>();
 
-            var configurationService = Container.Resolve<IConfigurationService>();
+            var configurationService = Container.Resolve<IAppSettingsService>();
             Container.RegisterInstance(new ServiceConfig(configurationService), new ContainerControlledLifetimeManager());
             
             // Register your types here.

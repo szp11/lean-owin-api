@@ -15,11 +15,11 @@ namespace LeanOwinApi
 
         public void Configuration(IAppBuilder app)
         {
-            // Get web api configuration.
+            // Configure web api
             WebApiConfig.Configure(app);
-            // File server configuration.
+            // Configure file server
             FileServerConfig.Configure(app);
-            
+            // Enable cors
             app.UseCors(CorsOptions.AllowAll);
         }
     }

@@ -4,7 +4,7 @@ using System.Configuration;
 
 namespace LeanOwinApi.Services
 {
-    public class ConfigurationService : IConfigurationService
+    public class AppSettingsService : IAppSettingsService
     {
         private readonly ConcurrentDictionary<string, object> _map = new ConcurrentDictionary<string, object>();
         private readonly Func<string, object> _getAppSetting = key => ConfigurationManager.AppSettings[key];

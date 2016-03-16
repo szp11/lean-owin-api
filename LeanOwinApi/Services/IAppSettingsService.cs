@@ -1,6 +1,6 @@
 ﻿namespace LeanOwinApi.Services
 {
-    public interface IConfigurationService
+    public interface IAppSettingsService
     {
         string GetString(string key);
         bool GetBool(string key);
