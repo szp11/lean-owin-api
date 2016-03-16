@@ -10,8 +10,6 @@ namespace LeanOwinApi.Config
     {
         [Dependency]
         public ServiceSettings ServiceSettings { get; set; }
-        [Dependency]
-        public WebApiSettings WebApiSettings { get; set; }
         
         private IDisposable _server;
 
@@ -45,7 +43,7 @@ namespace LeanOwinApi.Config
 
         public void OnStart()
         {
-            var startOptions = new StartOptions(WebApiSettings.BaseUrl);
+            var startOptions = new StartOptions(ServiceSettings.StartupBaseUrl);
             _server = WebApp.Start<OwinStartup>(startOptions);
         }
 
