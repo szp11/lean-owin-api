@@ -17,10 +17,6 @@ namespace LeanOwinApi
         {
             // Configure web api 
             WebApiConfig.Configure(app);
-            // Configure file server
-            FileServerConfig.Configure(app);
-            // Enable cors
-            app.UseCors(CorsOptions.AllowAll);
         }
     }
 }

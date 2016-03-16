@@ -17,30 +17,17 @@ namespace LeanOwinApi.Config
 
         public static void Configure()
         {
-            var svcSettings = GetServiceSettings();
+            var svcSettings = (ServiceSettings)(ConfigurationManager.GetSection("leanOwinApi/service") as dynamic);
             Container.RegisterInstance(svcSettings, new ContainerControlledLifetimeManager());
 
-            var webApiSettings = GetWebApiSettings();
+            var webApiSettings = (WebApiSettings)(ConfigurationManager.GetSection("leanOwinApi/webApi") as dynamic);
             Container.RegisterInstance(webApiSettings, new ContainerControlledLifetimeManager());
-            
+
             // Register your types here.
 
             // Type registration...
             // Container.RegisterType<ILogger, Logger>();
             // Container.RegisterType<IFakeService, FakeService>(new InjectionConstructor(false));
-            
-        }
-
-        private static ServiceSettings GetServiceSettings()
-        {
-            var settings = ConfigurationManager.GetSection("leanOwinApi/service") as dynamic;
-            return settings;
-        }
-
-        private static WebApiSettings GetWebApiSettings()
-        {
-            var settings = ConfigurationManager.GetSection("leanOwinApi/webApi") as dynamic;
-            return settings;
         }
 
         #region Singleton implementation
